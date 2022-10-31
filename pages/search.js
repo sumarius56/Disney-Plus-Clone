@@ -49,7 +49,9 @@ function search() {
           >
             Search
           </button>
-          <button onClick={() => setPage((prevPage) => prevPage + 1)}>NextPageTestButton</button>
+          <button onClick={() => setPage((prevPage) => prevPage + 1)}>
+            NextPageTestButton
+          </button>
         </div>
       </div>
       <div className="relative flex flex-col space-y-2 my-10 px-8 max-w-[1400px] mx-auto mt-[100px]">
@@ -59,8 +61,8 @@ function search() {
           id="container"
           className="grid sm:grid-cols-2 lg:grid-cols-3 items-center overflow-x-hidden  mx-auto space-y-3  space-x-6  scrollbar-thin  scrollbar-thumb-[#0c0421] scrollbar-track-[#313e54] p-2 pb-4 -m-2 "
         >
-          {content.map((result) => (
-            <MovieThumbnailSearch key={result.id} result={result} />
+          {content?.map((result) => (
+            <MovieThumbnailSearch key={result?.id} result={result} />
           ))}
         </div>
       </div>
