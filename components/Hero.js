@@ -9,11 +9,11 @@ function Hero() {
         <title>Log in | Disney+</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="relative min-h-[calc(100vh-72px)] mx-auto">
+      <div className="relative min-h-[calc(100vh-72px)] lg:max-h-[calc(100vh-72px)] mx-auto overflow-y-hidden">
         <img
           src="/images/hero-background.jpg"
           layout="fill"
-          className="object-cover"
+          className="object-cover"  
           alt="/"
         />
       </div>
