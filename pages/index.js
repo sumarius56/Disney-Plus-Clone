@@ -25,7 +25,7 @@ export default function Home({
       </Head>
 
       <Header />
-      {!session ? (
+      {session ? (
         <Hero />
       ) : (
         <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1] ">
@@ -83,7 +83,7 @@ export async function getServerSideProps(context) {
     top_ratedMovies,
     top_ratedShows,
     onAir_shows,
-    airingToday
+    airingToday,
   ] = await Promise.all([
     popularMoviesRes.json(),
     popularShowsRes.json(),
