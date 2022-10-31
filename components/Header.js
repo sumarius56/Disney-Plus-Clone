@@ -26,13 +26,17 @@ function Header() {
         <div className="hidden  ml-10 md:flex items-center space-x-3  lg:space-x-6">
           <a className="header-link group">
             <HomeIcon className="h-4 " />
-            <span 
-            onClick={()=> router.push('/')}
-            className="span hidden lg:inline-block text-xs lg:text-md">
+            <span
+              onClick={() => router.push("/")}
+              className="span hidden lg:inline-block text-xs lg:text-md"
+            >
               Home
             </span>
           </a>
-          <a className="header-link group">
+          <a
+            onClick={() => router.push("/search")}
+            className="header-link group"
+          >
             <SearchIcon className="h-4" />
             <span className="span hidden lg:inline-block text-xs lg:text-md">
               Search
