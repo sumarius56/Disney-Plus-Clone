@@ -21,7 +21,7 @@ function search() {
     try {
       const data = await fetch(
         `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
-          process.env.NEXT_PUBLIC_API_KEY
+          process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
         }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       ).then((response) => response.json());
       setContent(data.results);
