@@ -7,6 +7,8 @@ import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 function Movie({ result }) {
   const { data: session } = useSession();

@@ -4,7 +4,7 @@ import { db } from "../../../firebase";
 import { FirebaseAdapter } from "../../../vendor/firebase-adapter/dist/index";
 import * as firestoreFunctions from "firebase/firestore";
 import GitHubProvider from "next-auth/providers/github";
-import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+
 
 export default NextAuth({
   providers: [

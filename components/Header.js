@@ -47,11 +47,17 @@ function Header() {
               <PlusIcon className="h-4" />
               <span className="span text-xs lg:text-md">Watchlist</span>
             </a>
-            <a className="header-link group">
+            <a
+              onClick={() => router.push("/movies")}
+              className="header-link group"
+            >
               <img src="/images/movie-icon.svg" alt="" className="h-5" />
               <span className="span text-xs lg:text-md">Movies</span>
             </a>
-            <a className="header-link group">
+            <a
+              onClick={() => router.push("/shows")}
+              className="header-link group"
+            >
               <img src="/images/series-icon.svg" alt="" className="h-5" />
               <span className="span text-xs lg:text-md">Series</span>
             </a>
