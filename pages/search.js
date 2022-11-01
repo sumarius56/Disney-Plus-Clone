@@ -53,7 +53,7 @@ function search() {
         }&language=en-US&query=${searchText}&page=3&include_adult=false`
       ).then((response) => response.json());
       const data5 = await fetch(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+        `https://api.themoviedb.org/5/search/${type ? "tv" : "movie"}?api_key=${
           process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
         }&language=en-US&query=${searchText}&page=3&include_adult=false`
       ).then((response) => response.json());
