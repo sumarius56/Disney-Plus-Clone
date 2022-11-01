@@ -15,7 +15,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      margin: ["responsive", "hover", "first"],
+    },
   },
   plugins: [require("tailwind-scrollbar"), require("tailwind-scrollbar-hide")],
 };

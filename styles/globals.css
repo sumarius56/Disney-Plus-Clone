@@ -38,3 +38,8 @@
     text-shadow: none;
   }
 }
+
+.fuckingShit div:first-child {
+  margin-top: 12px;
+  margin-left: 24px;
+}

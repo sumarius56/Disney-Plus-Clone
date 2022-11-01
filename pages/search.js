@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import MovieThumbnailSearch from "../components/MovieThumbnail";
+import "../styles/child.module.css";
 
 function search() {
   const [type, setType] = useState(0);
@@ -59,7 +60,7 @@ function search() {
 
         <div
           id="container"
-          className="grid sm:grid-cols-2 lg:grid-cols-3 items-center overflow-x-hidden  mx-auto space-y-3  space-x-6  scrollbar-thin  scrollbar-thumb-[#0c0421] scrollbar-track-[#313e54] p-2 pb-4 -m-2 "
+          className="grid sm:grid-cols-2 fuckingShit  lg:grid-cols-3 items-center overflow-x-hidden  mx-auto space-y-3  space-x-6  scrollbar-thin  scrollbar-thumb-[#0c0421] scrollbar-track-[#313e54] p-2 pb-4 -m-3 "
         >
           {content?.map((result) => (
             <MovieThumbnailSearch key={result?.id} result={result} />

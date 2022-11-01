@@ -1,0 +1,8 @@
+#container:first-child {
+  margin-top: 12px;
+  margin-left: 24px;
+}
+
+.fuckingShit:first-child {
+  display: none;
+}
