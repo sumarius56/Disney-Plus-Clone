@@ -14,6 +14,15 @@ function Shows({
   return (
     <div className="flex flex-col">
       <Header />
+      <div className="flex flex-col mx-auto items-center justify-center my-10  space-y-10 w-full  ">
+        <img
+          className="rounded-lg w-[75%] object-contain max-h-[500px]"
+          src="https://media0.giphy.com/media/9E7kUhnT9eDok/giphy.gif"
+        />
+        <p className="font-bold text-xl md:text-2xl lg:text-4xl">
+          Disney+ | Movies
+        </p>
+      </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center mx-auto space-y-3  space-x-6 fuckingShit mb-10">
         {results.map((result) => (
           <MovieThumbnail

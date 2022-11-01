@@ -2,10 +2,27 @@ import React from "react";
 import Header from "../components/Header";
 import ShowThumbnail from "../components/ShowThumbnail";
 
-function Shows({ results, results2, results3, results4, results5,results6,results7 }) {
+function Shows({
+  results,
+  results2,
+  results3,
+  results4,
+  results5,
+  results6,
+  results7,
+}) {
   return (
     <div className="flex flex-col">
       <Header />
+      <div className="flex flex-col mx-auto items-center justify-center my-10  space-y-10 w-full  ">
+        <img
+          className="rounded-lg w-[75%] object-contain max-h-[500px] "
+          src="https://media.tenor.com/P0GncZjprpMAAAAd/herogasm-soldier-boy.gif"
+        />
+        <p className="font-bold text-xl md:text-2xl lg:text-4xl">
+          Disney+ | Series
+        </p>
+      </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center mx-auto space-y-3  space-x-6 fuckingShit mb-10">
         {results.map((result) => (
           <ShowThumbnail

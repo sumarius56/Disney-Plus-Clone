@@ -6,6 +6,6 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ["rb.gy", "image.tmdb.org"],
+    domains: ["rb.gy", "image.tmdb.org", "media0.giphy.com"],
   },
 };
