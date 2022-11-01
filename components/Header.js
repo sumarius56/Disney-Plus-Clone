@@ -23,41 +23,48 @@ function Header() {
         onClick={() => router.push("/")}
       />
       {session && (
-        <div className="hidden  ml-10 md:flex items-center space-x-3  lg:space-x-6">
-          <a className="header-link group">
-            <HomeIcon className="h-4 " />
-            <span
-              onClick={() => router.push("/")}
-              className="span hidden lg:inline-block text-xs lg:text-md"
+        <div className="flex items-center">
+          <div className="hidden  ml-10 md:flex items-center space-x-3  lg:space-x-6">
+            <a className="header-link group">
+              <HomeIcon className="h-4 " />
+              <span
+                onClick={() => router.push("/")}
+                className="span hidden lg:inline-block text-xs lg:text-md"
+              >
+                Home
+              </span>
+            </a>
+            <a
+              onClick={() => router.push("/search")}
+              className="header-link group"
             >
-              Home
-            </span>
-          </a>
-          <a
-            onClick={() => router.push("/search")}
-            className="header-link group"
-          >
-            <SearchIcon className="h-4" />
-            <span className="span hidden lg:inline-block text-xs lg:text-md">
-              Search
-            </span>
-          </a>
-          <a className="header-link group">
-            <PlusIcon className="h-4" />
-            <span className="span text-xs lg:text-md">Watchlist</span>
-          </a>
-          <a className="header-link group">
-            <StarIcon className="h-4" />
-            <span className="span text-xs lg:text-md">Originals</span>
-          </a>
-          <a className="header-link group">
-            <img src="/images/movie-icon.svg" alt="" className="h-5" />
-            <span className="span text-xs lg:text-md">Movies</span>
-          </a>
-          <a className="header-link group">
-            <img src="/images/series-icon.svg" alt="" className="h-5" />
-            <span className="span text-xs lg:text-md">Series</span>
-          </a>
+              <SearchIcon className="h-4" />
+              <span className="span hidden lg:inline-block text-xs lg:text-md">
+                Search
+              </span>
+            </a>
+            <a className="header-link group">
+              <PlusIcon className="h-4" />
+              <span className="span text-xs lg:text-md">Watchlist</span>
+            </a>
+            <a className="header-link group">
+              <img src="/images/movie-icon.svg" alt="" className="h-5" />
+              <span className="span text-xs lg:text-md">Movies</span>
+            </a>
+            <a className="header-link group">
+              <img src="/images/series-icon.svg" alt="" className="h-5" />
+              <span className="span text-xs lg:text-md">Series</span>
+            </a>
+          </div>
+          <div className="sm:hidden  ml-10 md:flex items-center space-x-3  lg:space-x-6">
+            <a
+              onClick={() => router.push("/search")}
+              className="header-link group"
+            >
+              <SearchIcon className="h-5 sm:hidden" />
+              <span className="span sm:hidden text-xs lg:text-md">Search</span>
+            </a>
+          </div>
         </div>
       )}
       {!session ? (
