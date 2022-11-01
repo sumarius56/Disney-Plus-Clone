@@ -1,37 +1,77 @@
+import {
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+} from "@heroicons/react/solid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import MovieThumbnailSearch from "../components/MovieThumbnail";
+
 import "../styles/child.module.css";
 
 function search() {
   const [type, setType] = useState(0);
   const [searchText, setSearchText] = useState("batman");
-  const [searchText2, setSearchText2] = useState("");
-  const [page, setPage] = useState(1);
+
   const [content, setContent] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(18);
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentMovies = content.slice(firstPostIndex, lastPostIndex);
 
   useEffect(() => {
     window.scroll(0, 0);
     fetchSearch();
     // eslint-disable-next-line
-  }, [type, page]);
+  }, [type, currentPage, setCurrentPage]);
 
   const fetchSearch = async () => {
+    let results = [];
     try {
       const data = await fetch(
         `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
           process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
-        }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+        }&language=en-US&query=${searchText}&page=1&include_adult=false`
       ).then((response) => response.json());
-      setContent(data.results);
-      setNumOfPages(data.total_pages);
-      console.log(data);
+
+      const data2 = await fetch(
+        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
+        }&language=en-US&query=${searchText}&page=2&include_adult=false`
+      ).then((response) => response.json());
+
+      const data3 = await fetch(
+        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
+        }&language=en-US&query=${searchText}&page=3&include_adult=false`
+      ).then((response) => response.json());
+      const data4 = await fetch(
+        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
+        }&language=en-US&query=${searchText}&page=3&include_adult=false`
+      ).then((response) => response.json());
+      const data5 = await fetch(
+        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY
+        }&language=en-US&query=${searchText}&page=3&include_adult=false`
+      ).then((response) => response.json());
+
+      results.push(
+        ...data.results,
+        ...data2.results,
+        ...data3.results,
+        ...data4.results,
+        ...data5.results
+      );
+
+      setContent(results);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="flex flex-col">
       <Header />
@@ -46,12 +86,12 @@ function search() {
           />
           <button
             className="border py-1 px-2.5 rounded-lg font-bold"
-            onClick={fetchSearch}
+            onClick={() => {
+              fetchSearch;
+              setCurrentPage(1);
+            }}
           >
             Search
-          </button>
-          <button onClick={() => setPage((prevPage) => prevPage + 1)}>
-            NextPageTestButton
           </button>
         </div>
       </div>
@@ -62,9 +102,35 @@ function search() {
           id="container"
           className="grid sm:grid-cols-2 fuckingShit  lg:grid-cols-3 items-center overflow-x-hidden  mx-auto space-y-3  space-x-6  scrollbar-thin  scrollbar-thumb-[#0c0421] scrollbar-track-[#313e54] p-2 pb-4 -m-3 "
         >
-          {content?.map((result) => (
-            <MovieThumbnailSearch key={result?.id} result={result} />
+          {currentMovies?.map((result) => (
+            <MovieThumbnailSearch
+              key={result?.id + Math.random() * Math.random()}
+              result={result}
+            />
           ))}
+        </div>
+
+        <div className="flex space-x-3 mx-auto items-center">
+          <button
+            className="hover:scale-115 hover:animate:pulse"
+            onClick={() =>
+              setCurrentPage((prevPage) =>
+                prevPage > 1 ? prevPage - 1 : prevPage
+              )
+            }
+          >
+            <ChevronDoubleLeftIcon className="w-10 hover:text-[#313e54] " />
+          </button>
+          <p className="font-bold border rounded-full px-3 py-1 flex items-center justify-center">
+            {" "}
+            {currentPage}
+          </p>
+          <button
+            className="hover:scale-115 hover:animate:pulse"
+            onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+          >
+            <ChevronDoubleRightIcon className="w-10 hover:text-[#313e54] " />
+          </button>
         </div>
       </div>
     </div>
