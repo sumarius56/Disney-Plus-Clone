@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import MovieThumbnail from "../components/MovieThumbnail";
+import { motion } from "framer-motion";
 
 function Shows({
   results,
@@ -14,16 +15,40 @@ function Shows({
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="flex flex-col mx-auto items-center justify-center my-10  space-y-10 w-full  ">
-        <img
+      <motion.div className="flex relative flex-col mx-auto items-center justify-center   space-y-10 w-full  ">
+        <motion.img
+          initial={{ opacity: 1 }}
+          whileInView={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+          }}
           className="rounded-lg w-[75%] object-contain max-h-[500px]"
           src="https://media0.giphy.com/media/9E7kUhnT9eDok/giphy.gif"
         />
-        <p className="font-bold text-xl md:text-2xl lg:text-4xl">
+
+        <motion.p
+          initial={{ opacity: 0, y: -200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 2,
+          }}
+          className=" absolute font-bold text-xl md:text-2xl lg:text-4xl"
+        >
           Disney+ | Movies
-        </p>
-      </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center mx-auto space-y-3  space-x-6 fuckingShit mb-10">
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, x: -500 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 2,
+          }}
+          className="font-bold text-3xl absolute bottom-20"
+        >
+          Watch your favourite movies
+        </motion.p>
+      </motion.div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center mx-auto space-y-3 mt-5 space-x-6 fuckingShit mb-10">
         {results.map((result) => (
           <MovieThumbnail
             key={result.id + Math.random() * Math.random()}
