@@ -44,10 +44,9 @@ function Header() {
               </span>
             </a>
             <a
-            onClick={
-              ()=> router.push('/watchlater')
-            }
-            className="header-link group">
+              onClick={() => router.push("/watchlater")}
+              className="header-link group"
+            >
               <PlusIcon className="h-4" />
               <span className="span text-xs lg:text-md">Watchlist</span>
             </a>
@@ -84,6 +83,13 @@ function Header() {
               className="header-link group"
             >
               <img src="/images/series-icon.svg" alt="" className="h-5" />
+            </a>
+            <a
+              onClick={() => router.push("/watchlater")}
+              className="header-link group"
+            >
+              <PlusIcon className="h-4" />
+              
             </a>
           </div>
         </div>
