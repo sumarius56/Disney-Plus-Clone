@@ -25,7 +25,6 @@ function Show({ result }) {
       await updateDoc(showId, {
         savedShows: arrayUnion({
           id: result?.id,
-          // title: result?.title,
           img: result?.backdrop_path || result?.poster_path,
         }),
       });
@@ -45,6 +44,7 @@ function Show({ result }) {
   const index = result?.videos?.results?.findIndex(
     (element) => element.type === "Trailer"
   );
+
   return (
     <div className="overflow-y-hidden ">
       <Head>
