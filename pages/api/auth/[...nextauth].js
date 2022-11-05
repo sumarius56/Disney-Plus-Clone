@@ -4,7 +4,19 @@ import { db } from "../../../firebase";
 import { FirebaseAdapter } from "../../../vendor/firebase-adapter/dist/index";
 import * as firestoreFunctions from "firebase/firestore";
 import GitHubProvider from "next-auth/providers/github";
-
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  limit,
+  doc,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  runTransaction,
+} from "firebase/firestore";
 
 export default NextAuth({
   providers: [
@@ -29,5 +41,16 @@ export default NextAuth({
   adapter: FirebaseAdapter({
     db: db,
     ...firestoreFunctions,
+    collection,
+    query,
+    getDocs,
+    where,
+    limit,
+    doc,
+    getDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    runTransaction,
   }),
 });

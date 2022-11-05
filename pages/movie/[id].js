@@ -7,14 +7,21 @@ import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { collection, doc, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 function Movie({ result }) {
-  const { data: session } = useSession();
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const [showPlayer, setShowPlayer] = useState(false);
   const router = useRouter();
+
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (!session) {
@@ -25,6 +32,23 @@ function Movie({ result }) {
   const index = result?.videos?.results?.findIndex(
     (element) => element.type === "Trailer"
   );
+
+  const { data: session } = useSession();
+
+  const movieId = doc(db, "users", `${session?.user?.email}`);
+
+  const saveMovie = async () => {
+    await updateDoc(movieId, {
+      savedMovies: arrayUnion({
+        id: result.id,
+        title: result.title,
+        img: result.backdrop_path,
+      }),
+    });
+    console.log("done");
+    setIsSaved(!isSaved);
+  };
+
   return (
     <div className="overflow-y-hidden">
       <Head>
@@ -81,13 +105,15 @@ function Movie({ result }) {
                 </span>
               </button>
 
-              <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">
-                <PlusIcon className="h-6" />
-              </div>
-
-              <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">
-                <img src="/images/group-icon.svg" />
-              </div>
+              <button
+                className={
+                  !isSaved
+                    ? "rounded-full border-2  border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60"
+                    : "rounded-full border-2  text-green border-green-500 text-green-500 flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60"
+                }
+              >
+                <PlusIcon onClick={saveMovie} className="h-6" />
+              </button>
             </div>
             <p className="text-xs md:text-sm">
               {result.release_date || result.first_air_date} •{" "}

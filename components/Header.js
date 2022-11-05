@@ -43,7 +43,11 @@ function Header() {
                 Search
               </span>
             </a>
-            <a className="header-link group">
+            <a
+            onClick={
+              ()=> router.push('/watchlater')
+            }
+            className="header-link group">
               <PlusIcon className="h-4" />
               <span className="span text-xs lg:text-md">Watchlist</span>
             </a>

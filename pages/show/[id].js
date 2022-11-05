@@ -7,12 +7,34 @@ import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { db } from "../../firebase";
+import { arrayUnion, doc, updateDoc, setDoc } from "firebase/firestore";
 
 function Show({ result }) {
   const { data: session } = useSession();
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const [showPlayer, setShowPlayer] = useState(false);
   const router = useRouter();
+
+  const [isSaved, setIsSaved] = useState(false);
+
+  const showId = doc(db, "users", `${session?.user?.email}`);
+
+  const saveShow = async () => {
+    try {
+      await updateDoc(showId, {
+        savedShows: arrayUnion({
+          id: result?.id,
+          // title: result?.title,
+          img: result?.backdrop_path || result?.poster_path,
+        }),
+      });
+
+      setIsSaved(!isSaved);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!session) {
@@ -79,21 +101,23 @@ function Show({ result }) {
                 </span>
               </button>
 
-              <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">
-                <PlusIcon className="h-6" />
-              </div>
-
-              <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">
-                <img src="/images/group-icon.svg" />
+              <div
+                className={
+                  !isSaved
+                    ? "rounded-full border-2  border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60"
+                    : "rounded-full border-2  text-green border-green-500 text-green-500 flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60"
+                }
+              >
+                <PlusIcon onClick={saveShow} className="h-6" />
               </div>
             </div>
             <p className="text-xs md:text-sm">
               {result.release_date || result.first_air_date} •{" "}
               {Math.floor(result.runtime / 60)}h {result.runtime % 60}m •{" "}
-              {result.genres.map((genre) => genre.name + " ")}{" "}
+              {result?.genres?.map((genre) => genre.name + " ")}{" "}
             </p>
             <h4 className="text-sm md:text-lg max-w-4xl text-shadow-lg drop-shadow-lg ">
-              {result.overview}
+              {result?.overview}
             </h4>
           </div>
           {/* Bg Overlay */}
