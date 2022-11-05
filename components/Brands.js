@@ -8,6 +8,7 @@ function Brands() {
           videoSrc={[{ src: "/videos/disney.mp4", type: "video/mp4" }]}
           pausedOverlay={
             <img
+              className="h-full w-full object-cover"
               src="/images/disnep.png"
               loading="lazy"
               alt=""

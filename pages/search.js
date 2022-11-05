@@ -67,12 +67,12 @@ function search() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden items-center justify-center">
       <Header />
       <div className="flex mx-auto  mt-20">
         <div className="flex space-x-5 items-center rounded-lg  ">
           <input
-            className="text-[#031126] py-1 px-2 rounded-lg min-w-[300px]"
+            className="text-[#031126] py-1 px-2 rounded-lg min-w-[200px] md:min-w-[300px]"
             type="text"
             label="Search"
             onChange={(e) => setSearchText(e.target.value)}

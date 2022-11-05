@@ -62,13 +62,24 @@ function Header() {
               <span className="span text-xs lg:text-md">Series</span>
             </a>
           </div>
-          <div className="sm:hidden  ml-10 md:flex items-center space-x-3  lg:space-x-6">
+          <div className="sm:hidden  flex ml-10   items-center space-x-4 mr-2  lg:space-x-6">
             <a
               onClick={() => router.push("/search")}
               className="header-link group"
             >
               <SearchIcon className="h-5 sm:hidden" />
-              <span className="span sm:hidden text-xs lg:text-md">Search</span>
+            </a>
+            <a
+              onClick={() => router.push("/movies")}
+              className="header-link group"
+            >
+              <img src="/images/movie-icon.svg" alt="" className="h-5" />
+            </a>
+            <a
+              onClick={() => router.push("/shows")}
+              className="header-link group"
+            >
+              <img src="/images/series-icon.svg" alt="" className="h-5" />
             </a>
           </div>
         </div>
@@ -86,13 +97,14 @@ function Header() {
             {session?.user?.name}
           </p>
           <img
-            className="ml-auto h-12 w-12 rounded-full object-cover "
+            onClick={signOut}
+            className="ml-auto h-12 w-12 rounded-full object-cover  "
             src={session?.user?.image}
             alt={session?.user?.name}
           />
           <p
             onClick={signOut}
-            className="cursor-pointer text-xs border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200"
+            className="hidden sm:inline-block cursor-pointer text-xs border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200"
           >
             Logout
           </p>

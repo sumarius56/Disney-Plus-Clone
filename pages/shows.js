@@ -20,28 +20,28 @@ function Shows({
           initial={{ opacity: 1 }}
           whileInView={{ opacity: 0 }}
           transition={{
-            duration: 2,
+            duration: 2.4,
           }}
           className="rounded-lg w-[75%] object-contain max-h-[500px] "
           src="https://media.tenor.com/P0GncZjprpMAAAAd/herogasm-soldier-boy.gif"
         />
         <motion.p
-          initial={{ opacity: 0, y: -200 }}
+          initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 2,
+            duration: 2.4,
           }}
-          className="absolute  font-bold text-xl md:text-2xl lg:text-4xl"
+          className="absolute  font-bold sm:text-xl md:text-2xl lg:text-4xl"
         >
           Disney+ | Series
         </motion.p>
         <motion.p
-          initial={{ opacity: 0, x: -500 }}
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{
             duration: 2,
           }}
-          className="font-bold text-3xl absolute bottom-20"
+          className="font-bold lg:text-3xl absolute bottom-0 sm:bottom-20"
         >
           Watch your favourite series
         </motion.p>

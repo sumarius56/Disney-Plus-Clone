@@ -27,22 +27,22 @@ function Shows({
         />
 
         <motion.p
-          initial={{ opacity: 0, y: -200 }}
+          initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
             duration: 2,
           }}
-          className=" absolute font-bold text-xl md:text-2xl lg:text-4xl"
+          className=" absolute font-bold sm:text-xl md:text-2xl lg:text-4xl"
         >
           Disney+ | Movies
         </motion.p>
         <motion.p
-          initial={{ opacity: 0, x: -500 }}
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{
             duration: 2,
           }}
-          className="font-bold text-3xl absolute bottom-20"
+          className="font-bold lg:text-3xl absolute bottom-0 sm:bottom-20"
         >
           Watch your favourite movies
         </motion.p>
