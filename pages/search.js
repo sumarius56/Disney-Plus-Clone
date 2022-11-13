@@ -67,8 +67,9 @@ function search() {
   };
 
   return (
-    <div className="flex flex-col overflow-x-hidden items-center justify-center">
+    <>
       <Header />
+    <div className="flex flex-col overflow-x-hidden items-center justify-center">
       <div className="flex mx-auto  mt-20">
         <div className="flex space-x-5 items-center rounded-lg  ">
           <input
@@ -128,6 +129,7 @@ function search() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

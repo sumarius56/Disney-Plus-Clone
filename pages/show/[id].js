@@ -9,12 +9,20 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { db } from "../../firebase";
 import { arrayUnion, doc, updateDoc, setDoc } from "firebase/firestore";
+import toast, { Toaster } from "react-hot-toast";
 
 function Show({ result }) {
   const { data: session } = useSession();
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const [showPlayer, setShowPlayer] = useState(false);
   const router = useRouter();
+
+  function notify() {
+    toast.success("Show added to watchlist.", {
+      duration: 4000,
+      position: "center",
+    });
+  }
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -29,7 +37,8 @@ function Show({ result }) {
         }),
       });
 
-      setIsSaved(!isSaved);
+       notify();
+       setIsSaved(!isSaved);
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +119,9 @@ function Show({ result }) {
               >
                 <PlusIcon onClick={saveShow} className="h-6" />
               </div>
+              <Toaster />
             </div>
+
             <p className="text-xs md:text-sm">
               {result.release_date || result.first_air_date} •{" "}
               {Math.floor(result.runtime / 60)}h {result.runtime % 60}m •{" "}

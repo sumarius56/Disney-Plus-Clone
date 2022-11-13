@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 function Movie({ result }) {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
@@ -22,6 +23,14 @@ function Movie({ result }) {
   const router = useRouter();
 
   const [isSaved, setIsSaved] = useState(false);
+
+  function notify() {
+    toast.success("Movie added to watchlist.", {
+      duration: 4000,
+      position: "center",
+    });
+  }
+
 
   useEffect(() => {
     if (!session) {
@@ -45,7 +54,8 @@ function Movie({ result }) {
         img: result.backdrop_path,
       }),
     });
-    console.log("done");
+    
+     notify()
     setIsSaved(!isSaved);
   };
 
@@ -114,6 +124,7 @@ function Movie({ result }) {
               >
                 <PlusIcon onClick={saveMovie} className="h-6" />
               </button>
+              <Toaster />
             </div>
             <p className="text-xs md:text-sm">
               {result.release_date || result.first_air_date} •{" "}
