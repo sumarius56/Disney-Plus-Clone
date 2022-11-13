@@ -82,8 +82,8 @@ function search() {
           <button
             className="border py-1 px-2.5 rounded-lg font-bold"
             onClick={() => {
-              fetchSearch;
-              setCurrentPage(1);
+              fetchSearch()
+              setCurrentPage(1)
             }}
           >
             Search
