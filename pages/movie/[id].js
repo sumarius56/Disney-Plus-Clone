@@ -13,6 +13,9 @@ import {
   doc,
   setDoc,
   updateDoc,
+  getDoc,
+  addDoc,
+  subscribeDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import toast, { Toaster } from "react-hot-toast";
@@ -46,21 +49,29 @@ function Movie({ result }) {
   const movieId = doc(db, "users", `${session?.user?.email}`);
 
   const saveMovie = async () => {
-    if (!doc(db, "users", "savedMovies")) {
-      setDoc(doc(db, "users", `${session?.user?.email}`), {
-        savedMovies: [],
-      });
-    }
-    await updateDoc(movieId, {
-      savedMovies: arrayUnion({
-        id: result.id,
-        title: result.title,
-        img: result.backdrop_path,
-      }),
+    await getDoc(movieId).then(async (doc) => {
+      if (doc.exists) {
+        await updateDoc(movieId, {
+          savedMovies: arrayUnion({
+            id: result.id,
+            title: result.title,
+            img: result.backdrop_path,
+          }),
+        });
+        notify();
+        setIsSaved(!isSaved);
+      } else {
+        await setDoc(movieId, {
+          savedMovies: arrayUnion({
+            id: result.id,
+            title: result.title,
+            img: result.backdrop_path,
+          }),
+        });
+        notify();
+        setIsSaved(!isSaved);
+      }
     });
-
-    notify();
-    setIsSaved(!isSaved);
   };
 
   return (

@@ -8,7 +8,15 @@ import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { db } from "../../firebase";
-import { arrayUnion, doc, updateDoc, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  updateDoc,
+  setDoc,
+  collection,
+  set,
+  getDoc,
+} from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 
 function Show({ result }) {
@@ -29,24 +37,27 @@ function Show({ result }) {
   const showId = doc(db, "users", `${session?.user?.email}`);
 
   const saveShow = async () => {
-    if (!doc(db, "users", "savedShows")) {
-      setDoc(doc(db, "users", `${session?.user?.email}`), {
-        savedShows: [],
-      });
-    }
-    try {
-      await updateDoc(showId, {
-        savedShows: arrayUnion({
-          id: result?.id,
-          img: result?.backdrop_path || result?.poster_path,
-        }),
-      });
-
-      notify();
-      setIsSaved(!isSaved);
-    } catch (error) {
-      console.log(error);
-    }
+    await getDoc(showId).then(async (doc) => {
+      if (doc.exists) {
+        await updateDoc(showId, {
+          savedShows: arrayUnion({
+            id: result.id,
+            img: result.backdrop_path,
+          }),
+        });
+        notify();
+        setIsSaved(!isSaved);
+      } else {
+        await setDoc(showId, {
+          savedShows: arrayUnion({
+            id: result.id,
+            img: result.backdrop_path,
+          }),
+        });
+        notify();
+        setIsSaved(!isSaved);
+      }
+    });
   };
 
   useEffect(() => {
