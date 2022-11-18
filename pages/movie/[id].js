@@ -31,7 +31,6 @@ function Movie({ result }) {
     });
   }
 
-
   useEffect(() => {
     if (!session) {
       router.push("/");
@@ -47,15 +46,15 @@ function Movie({ result }) {
   const movieId = doc(db, "users", `${session?.user?.email}`);
 
   const saveMovie = async () => {
-    await updateDoc(movieId, {
+    await setDoc(movieId, {
       savedMovies: arrayUnion({
         id: result.id,
         title: result.title,
         img: result.backdrop_path,
       }),
     });
-    
-     notify()
+
+    notify();
     setIsSaved(!isSaved);
   };
 
