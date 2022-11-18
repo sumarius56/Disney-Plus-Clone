@@ -38,7 +38,7 @@ function Show({ result }) {
 
   const saveShow = async () => {
     await getDoc(showId).then(async (doc) => {
-      if (doc.exists) {
+      if (doc.exists()) {
         await updateDoc(showId, {
           savedShows: arrayUnion({
             id: result.id,

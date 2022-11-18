@@ -50,7 +50,7 @@ function Movie({ result }) {
 
   const saveMovie = async () => {
     await getDoc(movieId).then(async (doc) => {
-      if (doc.exists) {
+      if (doc.exists()) {
         await updateDoc(movieId, {
           savedMovies: arrayUnion({
             id: result.id,
