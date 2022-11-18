@@ -29,6 +29,11 @@ function Show({ result }) {
   const showId = doc(db, "users", `${session?.user?.email}`);
 
   const saveShow = async () => {
+    if (!doc(db, "users", "savedShows")) {
+      setDoc(doc(db, "users", `${session?.user?.email}`), {
+        savedShows: [],
+      });
+    }
     try {
       await updateDoc(showId, {
         savedShows: arrayUnion({
@@ -37,8 +42,8 @@ function Show({ result }) {
         }),
       });
 
-       notify();
-       setIsSaved(!isSaved);
+      notify();
+      setIsSaved(!isSaved);
     } catch (error) {
       console.log(error);
     }

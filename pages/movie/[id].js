@@ -46,7 +46,12 @@ function Movie({ result }) {
   const movieId = doc(db, "users", `${session?.user?.email}`);
 
   const saveMovie = async () => {
-    await setDoc(movieId, {
+    if (!doc(db, "users", "savedMovies")) {
+      setDoc(doc(db, "users", `${session?.user?.email}`), {
+        savedMovies: [],
+      });
+    }
+    await updateDoc(movieId, {
       savedMovies: arrayUnion({
         id: result.id,
         title: result.title,
